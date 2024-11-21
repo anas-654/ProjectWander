@@ -12,6 +12,31 @@ module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
 };
 
+module.exports.searchListing=async(req,res)=>{
+    try{
+    let {name}=req.query;
+    console.log(name);
+    // const allListings=await Listing.find({title:name});
+    const allListings = await Listing.find({ $text: { $search:name}});
+
+    if(allListings.length>0){
+        console.log(allListings);
+        // req.flash("success","found few results");
+        res.render("listings/index.ejs",{allListings});
+        console.log("allListing");  
+    }
+    else{
+        req.flash("error","No Listings of This name");
+        
+        res.redirect("/listings");
+    }
+   
+    }
+    catch{
+        req.flash("error","No Listings of This name");
+        res.redirect("/listings");
+    }
+}
 
 module.exports.showListing = async (req, res) => {
     let {id} = req.params;

@@ -48,7 +48,7 @@ listingSchema.post("findOneAndDelete", async (listing) => {
     await Review.deleteMany({_id: {$in: listing.review}});
   }
 });
-
+listingSchema.index({ title: "text", description: "text" });
 //CREATING MODULE
 const Listing = mongoose.model("Listing", listingSchema) ;
 

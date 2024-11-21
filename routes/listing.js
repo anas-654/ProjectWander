@@ -24,7 +24,8 @@ router
         wrapAsync(lisitngController.createListing)
     );
    
-
+router.get("/search",isLoggedIn,wrapAsync(lisitngController.searchListing));
+                                          
 //New Route
 router.get("/new", isLoggedIn, lisitngController.renderNewForm );
 
