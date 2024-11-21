@@ -35,7 +35,7 @@ main()
     console.log("connected to DB")
 })
 .catch(() => {
-    console.log(err);
+    console.log("Some Error");
 });
 
 async function main() {  
